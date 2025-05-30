@@ -1,440 +1,440 @@
-# --- PowerShell ½Å±¾ÉèÖÃ ---
-# $ErrorActionPreference = "Stop"£ºµ±ÃüÁîÓöµ½·ÇÖÕÖ¹´íÎóÊ±£¬Á¢¼´Í£Ö¹½Å±¾Ö´ĞĞ¡£
-# $ProgressPreference = "SilentlyContinue"£ºÒÖÖÆ Invoke-WebRequest µÈ Cmdlet µÄ½ø¶ÈÌõÏÔÊ¾¡£
+# --- PowerShell è„šæœ¬è®¾ç½® ---
+# $ErrorActionPreference = "Stop"ï¼šå½“å‘½ä»¤é‡åˆ°éç»ˆæ­¢é”™è¯¯æ—¶ï¼Œç«‹å³åœæ­¢è„šæœ¬æ‰§è¡Œã€‚
+# $ProgressPreference = "SilentlyContinue"ï¼šæŠ‘åˆ¶ Invoke-WebRequest ç­‰ Cmdlet çš„è¿›åº¦æ¡æ˜¾ç¤ºã€‚
 $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
-# --- ÑÕÉ«¶¨Òå (ÊÊÓÃÓÚ PowerShell) ---
-# ÕâĞ©º¯ÊıÊ¹ÓÃ Write-Host Cmdlet ºÍ -ForegroundColor ²ÎÊıÀ´Êä³ö´øÑÕÉ«µÄÎÄ±¾¡£
-# ×¢Òâ£ºÕâĞ©ÑÕÉ«ÔÚÏÖ´úµÄ Windows Terminal ºÍ PowerShell 7+ ÖĞÖ§³ÖÁ¼ºÃ£¬µ«ÔÚ¾É°æ¿ØÖÆÌ¨ÖĞ¿ÉÄÜÏÔÊ¾²»ÕıÈ·¡£
+# --- é¢œè‰²å®šä¹‰ (é€‚ç”¨äº PowerShell) ---
+# è¿™äº›å‡½æ•°ä½¿ç”¨ Write-Host Cmdlet å’Œ -ForegroundColor å‚æ•°æ¥è¾“å‡ºå¸¦é¢œè‰²çš„æ–‡æœ¬ã€‚
+# æ³¨æ„ï¼šè¿™äº›é¢œè‰²åœ¨ç°ä»£çš„ Windows Terminal å’Œ PowerShell 7+ ä¸­æ”¯æŒè‰¯å¥½ï¼Œä½†åœ¨æ—§ç‰ˆæ§åˆ¶å°ä¸­å¯èƒ½æ˜¾ç¤ºä¸æ­£ç¡®ã€‚
 Function Write-Host-Green { param([string]$Message) Write-Host -ForegroundColor Green $Message }
 Function Write-Host-Blue { param([string]$Message) Write-Host -ForegroundColor Blue $Message }
 Function Write-Host-Yellow { param([string]$Message) Write-Host -ForegroundColor Yellow $Message }
 Function Write-Host-Red { param([string]$Message) Write-Host -ForegroundColor Red $Message }
-Function Write-Host-Purple { param([string]$Message) Write-Host -ForegroundColor DarkMagenta $Message } # PowerShell ÖĞµÄ×ÏÉ«Í¨³£ÊÇ DarkMagenta
+Function Write-Host-Purple { param([string]$Message) Write-Host -ForegroundColor DarkMagenta $Message } # PowerShell ä¸­çš„ç´«è‰²é€šå¸¸æ˜¯ DarkMagenta
 Function Write-Host-Cyan { param([string]$Message) Write-Host -ForegroundColor Cyan $Message }
 
-# --- ÅäÖÃ²¿·Ö ---
-$LADEFREE_REPO_URL_BASE = "https://github.com/byJoey/ladefree" # Ladefree Ó¦ÓÃµÄ GitHub ²Ö¿â»ù´¡URL
-$LADEFREE_REPO_BRANCH = "main" # Ladefree ²Ö¿âµÄ·ÖÖ§
-$LADE_CLI_NAME = "lade.exe" # Lade CLI ¿ÉÖ´ĞĞÎÄ¼şÃû (Windows ÉÏÍ¨³£ÊÇ .exe)
-# $env:ProgramFiles ÊÇ Windows ÉÏµÄ±ê×¼³ÌĞòÎÄ¼şÄ¿Â¼£¬ÀıÈç C:\Program Files
-$LADE_INSTALL_PATH = "$env:ProgramFiles\LadeCLI" # Lade CLI µÄ±ê×¼°²×°Â·¾¶
+# --- é…ç½®éƒ¨åˆ† ---
+$LADEFREE_REPO_URL_BASE = "https://github.com/amosgansweet/ladefree" # Ladefree åº”ç”¨çš„ GitHub ä»“åº“åŸºç¡€URL
+$LADEFREE_REPO_BRANCH = "main" # Ladefree ä»“åº“çš„åˆ†æ”¯
+$LADE_CLI_NAME = "lade.exe" # Lade CLI å¯æ‰§è¡Œæ–‡ä»¶å (Windows ä¸Šé€šå¸¸æ˜¯ .exe)
+# $env:ProgramFiles æ˜¯ Windows ä¸Šçš„æ ‡å‡†ç¨‹åºæ–‡ä»¶ç›®å½•ï¼Œä¾‹å¦‚ C:\Program Files
+$LADE_INSTALL_PATH = "$env:ProgramFiles\LadeCLI" # Lade CLI çš„æ ‡å‡†å®‰è£…è·¯å¾„
 
-# --- ×÷ÕßĞÅÏ¢ ---
-# ×÷Õß£ºJoey
-# ²©¿Í£ºjoeyblog.net
-# Telegram Èº£ºhttps://t.me/+ft-zI76oovgwNmRh
+# --- ä½œè€…ä¿¡æ¯ ---
+# ä½œè€…ï¼šJoey
+# åšå®¢ï¼šjoeyblog.net
+# Telegram ç¾¤ï¼šhttps://t.me/+ft-zI76oovgwNmRh
 
-# --- ¸¨Öúº¯Êı£ºÏÔÊ¾»¶Ó­ĞÅÏ¢ ---
+# --- è¾…åŠ©å‡½æ•°ï¼šæ˜¾ç¤ºæ¬¢è¿ä¿¡æ¯ ---
 Function Display-Welcome {
-    Clear-Host # Çå³ı¿ØÖÆÌ¨ÆÁÄ»
+    Clear-Host # æ¸…é™¤æ§åˆ¶å°å±å¹•
     Write-Host-Cyan "#############################################################"
     Write-Host-Cyan "#                                                           #"
-    Write-Host-Cyan "#        " -NoNewline; Write-Host-Blue "»¶Ó­Ê¹ÓÃ Lade CLI ¶à¹¦ÄÜ¹ÜÀí½Å±¾ v1.0.0" -NoNewline; Write-Host-Cyan "        #"
+    Write-Host-Cyan "#        " -NoNewline; Write-Host-Blue "æ¬¢è¿ä½¿ç”¨ Lade CLI å¤šåŠŸèƒ½ç®¡ç†è„šæœ¬ v1.0.0" -NoNewline; Write-Host-Cyan "        #"
     Write-Host-Cyan "#                                                           #"
     Write-Host-Cyan "#############################################################"
     Write-Host-Green ""
-    Write-Host "  >> ×÷Õß: Joey"
-    Write-Host "  >> ²©¿Í: joeyblog.net"
-    Write-Host "  >> Telegram Èº: https://t.me/+ft-zI76oovgwNmRh"
-    Write-Host "  >> ²¿ÊğµÄ´úÂënote.jsÀ´×Ô https://github.com/eooce ÀÏÍõ "
+    Write-Host "  >> ä½œè€…: Joey"
+    Write-Host "  >> åšå®¢: joeyblog.net"
+    Write-Host "  >> Telegram ç¾¤: https://t.me/+ft-zI76oovgwNmRh"
+    Write-Host "  >> éƒ¨ç½²çš„ä»£ç note.jsæ¥è‡ª https://github.com/eooce è€ç‹ "
     Write-Host ""
-    Write-Host-Yellow "ÕâÊÇÒ»¸ö×Ô¶¯»¯ Lade Ó¦ÓÃ²¿ÊğºÍ¹ÜÀí¹¤¾ß£¬Ö¼ÔÚ¼ò»¯²Ù×÷¡£"
+    Write-Host-Yellow "è¿™æ˜¯ä¸€ä¸ªè‡ªåŠ¨åŒ– Lade åº”ç”¨éƒ¨ç½²å’Œç®¡ç†å·¥å…·ï¼Œæ—¨åœ¨ç®€åŒ–æ“ä½œã€‚"
     Write-Host ""
-    Read-Host "°´ Enter ¼ü¿ªÊ¼..." | Out-Null # µÈ´ıÓÃ»§°´ Enter ¼ü£¬²¢¶ªÆúÊäÈë
+    Read-Host "æŒ‰ Enter é”®å¼€å§‹..." | Out-Null # ç­‰å¾…ç”¨æˆ·æŒ‰ Enter é”®ï¼Œå¹¶ä¸¢å¼ƒè¾“å…¥
 }
 
-# --- ¸¨Öúº¯Êı£ºÏÔÊ¾¹¦ÄÜÇø±êÌâ ---
+# --- è¾…åŠ©å‡½æ•°ï¼šæ˜¾ç¤ºåŠŸèƒ½åŒºæ ‡é¢˜ ---
 Function Display-SectionHeader {
-    param([string]$Title) # ½ÓÊÜÒ»¸ö×Ö·û´®²ÎÊı×÷Îª±êÌâ
+    param([string]$Title) # æ¥å—ä¸€ä¸ªå­—ç¬¦ä¸²å‚æ•°ä½œä¸ºæ ‡é¢˜
     Write-Host ""
     Write-Host-Purple "--- $Title ---"
     Write-Host-Purple "-----------------------------------"
 }
 
-# --- ¸¨Öúº¯Êı£º¼ì²éÃüÁîÊÇ·ñ´æÔÚ ---
+# --- è¾…åŠ©å‡½æ•°ï¼šæ£€æŸ¥å‘½ä»¤æ˜¯å¦å­˜åœ¨ ---
 Function Test-CommandExists {
-    param([string]$Command) # ½ÓÊÜÒ»¸ö×Ö·û´®²ÎÊı×÷ÎªÃüÁîÃû
-    # Get-Command ³¢ÊÔ²éÕÒÖ¸¶¨µÄÃüÁî¡£-ErrorAction SilentlyContinue ÒÖÖÆ´íÎóĞÅÏ¢¡£
-    # Èç¹ûÕÒµ½ÃüÁî£¬Ëü½«·µ»ØÒ»¸ö¶ÔÏó£¬·ñÔò·µ»Ø $null¡£
+    param([string]$Command) # æ¥å—ä¸€ä¸ªå­—ç¬¦ä¸²å‚æ•°ä½œä¸ºå‘½ä»¤å
+    # Get-Command å°è¯•æŸ¥æ‰¾æŒ‡å®šçš„å‘½ä»¤ã€‚-ErrorAction SilentlyContinue æŠ‘åˆ¶é”™è¯¯ä¿¡æ¯ã€‚
+    # å¦‚æœæ‰¾åˆ°å‘½ä»¤ï¼Œå®ƒå°†è¿”å›ä¸€ä¸ªå¯¹è±¡ï¼Œå¦åˆ™è¿”å› $nullã€‚
     (Get-Command -Name $Command -ErrorAction SilentlyContinue) -ne $null
 }
 
-# --- ¸¨Öúº¯Êı£º¼ì²é Lade CLI ÊÇ·ñ´æÔÚÇÒ¿ÉÓÃ ---
+# --- è¾…åŠ©å‡½æ•°ï¼šæ£€æŸ¥ Lade CLI æ˜¯å¦å­˜åœ¨ä¸”å¯ç”¨ ---
 Function Test-LadeCli {
-    Test-CommandExists $LADE_CLI_NAME # µ÷ÓÃ Test-CommandExists ¼ì²é Lade CLI
+    Test-CommandExists $LADE_CLI_NAME # è°ƒç”¨ Test-CommandExists æ£€æŸ¥ Lade CLI
 }
 
-# --- ¸¨Öúº¯Êı£ºÈ·±£ÒÑµÇÂ¼ Lade ---
+# --- è¾…åŠ©å‡½æ•°ï¼šç¡®ä¿å·²ç™»å½• Lade ---
 Function Ensure-LadeLogin {
     Write-Host ""
-    Write-Host-Purple "--- ¼ì²é Lade µÇÂ¼×´Ì¬ ---"
-    # ³¢ÊÔÖ´ĞĞÒ»¸öĞèÒªÈÏÖ¤µÄ Lade ÃüÁî£¨ÀıÈç `lade apps list`£©¡£
-    # Èç¹û¸ÃÃüÁîÊ§°Ü£¨Å×³ö´íÎó£©£¬Ôò±íÊ¾Î´µÇÂ¼»ò»á»°¹ıÆÚ¡£
+    Write-Host-Purple "--- æ£€æŸ¥ Lade ç™»å½•çŠ¶æ€ ---"
+    # å°è¯•æ‰§è¡Œä¸€ä¸ªéœ€è¦è®¤è¯çš„ Lade å‘½ä»¤ï¼ˆä¾‹å¦‚ `lade apps list`ï¼‰ã€‚
+    # å¦‚æœè¯¥å‘½ä»¤å¤±è´¥ï¼ˆæŠ›å‡ºé”™è¯¯ï¼‰ï¼Œåˆ™è¡¨ç¤ºæœªç™»å½•æˆ–ä¼šè¯è¿‡æœŸã€‚
     try {
-        # Ê¹ÓÃ & ÔËËã·ûÖ´ĞĞÍâ²¿¿ÉÖ´ĞĞÎÄ¼ş¡£Out-Null ¶ªÆúÃüÁîµÄ±ê×¼Êä³ö¡£
+        # ä½¿ç”¨ & è¿ç®—ç¬¦æ‰§è¡Œå¤–éƒ¨å¯æ‰§è¡Œæ–‡ä»¶ã€‚Out-Null ä¸¢å¼ƒå‘½ä»¤çš„æ ‡å‡†è¾“å‡ºã€‚
         & lade apps list 
-        Write-Host-Green "Lade ÒÑµÇÂ¼¡£"
+        Write-Host-Green "Lade å·²ç™»å½•ã€‚"
     } catch {
-        Write-Host-Yellow "Lade µÇÂ¼»á»°ÒÑ¹ıÆÚ»òÎ´µÇÂ¼¡£Çë¸ù¾İÌáÊ¾ÊäÈëÄúµÄ Lade µÇÂ¼Æ¾¾İ¡£"
+        Write-Host-Yellow "Lade ç™»å½•ä¼šè¯å·²è¿‡æœŸæˆ–æœªç™»å½•ã€‚è¯·æ ¹æ®æç¤ºè¾“å…¥æ‚¨çš„ Lade ç™»å½•å‡­æ®ã€‚"
         try {
-            & lade login # ÌáÊ¾ÓÃ»§½øĞĞµÇÂ¼
-            Write-Host-Green "Lade µÇÂ¼³É¹¦£¡"
+            & lade login # æç¤ºç”¨æˆ·è¿›è¡Œç™»å½•
+            Write-Host-Green "Lade ç™»å½•æˆåŠŸï¼"
         } catch {
-            Write-Host-Red "´íÎó£ºLade µÇÂ¼Ê§°Ü¡£Çë¼ì²éÓÃ»§Ãû/ÃÜÂë»òÍøÂçÁ¬½Ó¡£"
-            exit 1 # µÇÂ¼Ê§°Ü£¬ÍË³ö½Å±¾
+            Write-Host-Red "é”™è¯¯ï¼šLade ç™»å½•å¤±è´¥ã€‚è¯·æ£€æŸ¥ç”¨æˆ·å/å¯†ç æˆ–ç½‘ç»œè¿æ¥ã€‚"
+            exit 1 # ç™»å½•å¤±è´¥ï¼Œé€€å‡ºè„šæœ¬
         }
     }
 }
 
-# --- ¹¦ÄÜº¯Êı£º²¿ÊğÓ¦ÓÃ ---
+# --- åŠŸèƒ½å‡½æ•°ï¼šéƒ¨ç½²åº”ç”¨ ---
 Function Deploy-App {
-    Display-SectionHeader "²¿Êğ Lade Ó¦ÓÃ"
+    Display-SectionHeader "éƒ¨ç½² Lade åº”ç”¨"
 
-    Ensure-LadeLogin # È·±£ÓÃ»§ÒÑµÇÂ¼
+    Ensure-LadeLogin # ç¡®ä¿ç”¨æˆ·å·²ç™»å½•
 
-    $LADE_APP_NAME = Read-Host "ÇëÊäÈëÄúÒª²¿ÊğµÄ Lade Ó¦ÓÃÃû³Æ (ÀıÈç: my-ladefree-app):"
-    # [string]::IsNullOrWhiteSpace ¼ì²é×Ö·û´®ÊÇ·ñÎª null¡¢¿Õ»ò½ö°üº¬¿Õ°××Ö·û
+    $LADE_APP_NAME = Read-Host "è¯·è¾“å…¥æ‚¨è¦éƒ¨ç½²çš„ Lade åº”ç”¨åç§° (ä¾‹å¦‚: my-ladefree-app):"
+    # [string]::IsNullOrWhiteSpace æ£€æŸ¥å­—ç¬¦ä¸²æ˜¯å¦ä¸º nullã€ç©ºæˆ–ä»…åŒ…å«ç©ºç™½å­—ç¬¦
     if ([string]::IsNullOrWhiteSpace($LADE_APP_NAME)) {
-        Write-Host-Yellow "Ó¦ÓÃÃû³Æ²»ÄÜÎª¿Õ¡£È¡Ïû²¿Êğ¡£"
-        return # ·µ»Øº¯Êı£¬²»¼ÌĞøÖ´ĞĞ²¿Êğ
+        Write-Host-Yellow "åº”ç”¨åç§°ä¸èƒ½ä¸ºç©ºã€‚å–æ¶ˆéƒ¨ç½²ã€‚"
+        return # è¿”å›å‡½æ•°ï¼Œä¸ç»§ç»­æ‰§è¡Œéƒ¨ç½²
     }
 
-    Write-Host "ÕıÔÚ¼ì²éÓ¦ÓÃ '$LADE_APP_NAME' ÊÇ·ñ´æÔÚ..."
+    Write-Host "æ­£åœ¨æ£€æŸ¥åº”ç”¨ '$LADE_APP_NAME' æ˜¯å¦å­˜åœ¨..."
     $app_exists = $false
     try {
-        $appList = & lade apps list # »ñÈ¡Ó¦ÓÃÁĞ±í
-        # -like ÔËËã·ûÓÃÓÚÍ¨Åä·ûÆ¥Åä¡£¼ì²éÁĞ±íÖĞÊÇ·ñ°üº¬Ó¦ÓÃÃû³Æ¡£
+        $appList = & lade apps list # è·å–åº”ç”¨åˆ—è¡¨
+        # -like è¿ç®—ç¬¦ç”¨äºé€šé…ç¬¦åŒ¹é…ã€‚æ£€æŸ¥åˆ—è¡¨ä¸­æ˜¯å¦åŒ…å«åº”ç”¨åç§°ã€‚
         if ($appList -like "*$LADE_APP_NAME*") {
             $app_exists = $true
         }
     } catch {
-        # Èç¹û»ñÈ¡Ó¦ÓÃÁĞ±íÊ§°Ü£¬¿ÉÄÜÊÇÍøÂçÎÊÌâ»ò Lade CLI ÎÊÌâ£¬µ«ÎÒÃÇÈÔ³¢ÊÔ¼ÌĞø¡£
-        Write-Host-Yellow "ÎŞ·¨»ñÈ¡Ó¦ÓÃÁĞ±íÒÔÑéÖ¤ÆäÊÇ·ñ´æÔÚ£¬¼Ù¶¨²»´æÔÚ»ò¼ÌĞø´´½¨/²¿Êğ¡£"
+        # å¦‚æœè·å–åº”ç”¨åˆ—è¡¨å¤±è´¥ï¼Œå¯èƒ½æ˜¯ç½‘ç»œé—®é¢˜æˆ– Lade CLI é—®é¢˜ï¼Œä½†æˆ‘ä»¬ä»å°è¯•ç»§ç»­ã€‚
+        Write-Host-Yellow "æ— æ³•è·å–åº”ç”¨åˆ—è¡¨ä»¥éªŒè¯å…¶æ˜¯å¦å­˜åœ¨ï¼Œå‡å®šä¸å­˜åœ¨æˆ–ç»§ç»­åˆ›å»º/éƒ¨ç½²ã€‚"
     }
 
     if ($app_exists) {
-        Write-Host-Green "Ó¦ÓÃ '$LADE_APP_NAME' ÒÑ´æÔÚ£¬½«Ö±½Ó²¿Êğ¸üĞÂ¡£"
+        Write-Host-Green "åº”ç”¨ '$LADE_APP_NAME' å·²å­˜åœ¨ï¼Œå°†ç›´æ¥éƒ¨ç½²æ›´æ–°ã€‚"
     } else {
-        Write-Host-Yellow "Ó¦ÓÃ '$LADE_APP_NAME' ²»´æÔÚ£¬½«³¢ÊÔ´´½¨ĞÂÓ¦ÓÃ¡£"
-        Write-Host-Cyan "×¢Òâ£º´´½¨Ó¦ÓÃ½«½»»¥Ê½Ñ¯ÎÊ 'Plan' ºÍ 'Region'£¬ÇëÊÖ¶¯Ñ¡Ôñ¡£"
+        Write-Host-Yellow "åº”ç”¨ '$LADE_APP_NAME' ä¸å­˜åœ¨ï¼Œå°†å°è¯•åˆ›å»ºæ–°åº”ç”¨ã€‚"
+        Write-Host-Cyan "æ³¨æ„ï¼šåˆ›å»ºåº”ç”¨å°†äº¤äº’å¼è¯¢é—® 'Plan' å’Œ 'Region'ï¼Œè¯·æ‰‹åŠ¨é€‰æ‹©ã€‚"
         try {
-            & lade apps create "$LADE_APP_NAME" # ³¢ÊÔ´´½¨Ó¦ÓÃ
-            Write-Host-Green "Lade Ó¦ÓÃ´´½¨ÃüÁîÒÑ·¢ËÍ¡£"
+            & lade apps create "$LADE_APP_NAME" # å°è¯•åˆ›å»ºåº”ç”¨
+            Write-Host-Green "Lade åº”ç”¨åˆ›å»ºå‘½ä»¤å·²å‘é€ã€‚"
         } catch {
-            Write-Host-Red "´íÎó£ºLade Ó¦ÓÃ´´½¨Ê§°Ü¡£Çë¼ì²éÊäÈë»òÓ¦ÓÃÃû³ÆÊÇ·ñ¿ÉÓÃ¡£"
-            return # ´´½¨Ê§°Ü£¬·µ»Øº¯Êı
+            Write-Host-Red "é”™è¯¯ï¼šLade åº”ç”¨åˆ›å»ºå¤±è´¥ã€‚è¯·æ£€æŸ¥è¾“å…¥æˆ–åº”ç”¨åç§°æ˜¯å¦å¯ç”¨ã€‚"
+            return # åˆ›å»ºå¤±è´¥ï¼Œè¿”å›å‡½æ•°
         }
     }
 
     Write-Host ""
-    Write-Host-Blue "--- ÕıÔÚÏÂÔØ ZIP ²¢²¿Êğ Ladefree Ó¦ÓÃ (²»ÒÀÀµ Git) ---"
-    # Join-Path Cmdlet °²È«µØÆ´½ÓÂ·¾¶£¬´¦Àí²»Í¬µÄÂ·¾¶·Ö¸ô·û¡£
+    Write-Host-Blue "--- æ­£åœ¨ä¸‹è½½ ZIP å¹¶éƒ¨ç½² Ladefree åº”ç”¨ (ä¸ä¾èµ– Git) ---"
+    # Join-Path Cmdlet å®‰å…¨åœ°æ‹¼æ¥è·¯å¾„ï¼Œå¤„ç†ä¸åŒçš„è·¯å¾„åˆ†éš”ç¬¦ã€‚
     $ladefree_temp_download_dir = Join-Path $env:TEMP "ladefree_repo_download_$(Get-Random)"
-    # New-Item -ItemType Directory -Force ´´½¨Ä¿Â¼£¬Èç¹û´æÔÚÔò²»±¨´í¡£Out-Null ÒÖÖÆÊä³ö¡£
+    # New-Item -ItemType Directory -Force åˆ›å»ºç›®å½•ï¼Œå¦‚æœå­˜åœ¨åˆ™ä¸æŠ¥é”™ã€‚Out-Null æŠ‘åˆ¶è¾“å‡ºã€‚
     New-Item -ItemType Directory -Force -Path $ladefree_temp_download_dir | Out-Null
 
     $ladefree_download_url = "$LADEFREE_REPO_URL_BASE/archive/refs/heads/$LADEFREE_REPO_BRANCH.zip"
     $temp_ladefree_archive = Join-Path $ladefree_temp_download_dir "ladefree.zip"
 
-    Write-Host "ÕıÔÚÏÂÔØ $LADEFREE_REPO_URL_BASE ($LADEFREE_REPO_BRANCH ·ÖÖ§) Îª ZIP °ü..."
-    Write-Host "ÏÂÔØ URL: $ladefree_download_url"
+    Write-Host "æ­£åœ¨ä¸‹è½½ $LADEFREE_REPO_URL_BASE ($LADEFREE_REPO_BRANCH åˆ†æ”¯) ä¸º ZIP åŒ…..."
+    Write-Host "ä¸‹è½½ URL: $ladefree_download_url"
 
     try {
-        # Invoke-WebRequest ÊÇ PowerShell ÏÂÔØÎÄ¼şºÍÍøÒ³ÄÚÈİµÄÖ÷Òª Cmdlet¡£
+        # Invoke-WebRequest æ˜¯ PowerShell ä¸‹è½½æ–‡ä»¶å’Œç½‘é¡µå†…å®¹çš„ä¸»è¦ Cmdletã€‚
         Invoke-WebRequest -Uri $ladefree_download_url -OutFile $temp_ladefree_archive
     } catch {
-        Write-Host-Red "´íÎó£ºÏÂÔØ Ladefree ²Ö¿â ZIP °üÊ§°Ü¡£Çë¼ì²é URL »òÍøÂçÁ¬½Ó¡£"
-        # Remove-Item -Recurse -Force Ç¿ÖÆÉ¾³ıÄ¿Â¼¼°ÆäÄÚÈİ£¬-ErrorAction SilentlyContinue ÒÖÖÆÉ¾³ı´íÎó¡£
+        Write-Host-Red "é”™è¯¯ï¼šä¸‹è½½ Ladefree ä»“åº“ ZIP åŒ…å¤±è´¥ã€‚è¯·æ£€æŸ¥ URL æˆ–ç½‘ç»œè¿æ¥ã€‚"
+        # Remove-Item -Recurse -Force å¼ºåˆ¶åˆ é™¤ç›®å½•åŠå…¶å†…å®¹ï¼Œ-ErrorAction SilentlyContinue æŠ‘åˆ¶åˆ é™¤é”™è¯¯ã€‚
         Remove-Item -Path $ladefree_temp_download_dir -Recurse -Force -ErrorAction SilentlyContinue
-        return # ÏÂÔØÊ§°Ü£¬·µ»Øº¯Êı
+        return # ä¸‹è½½å¤±è´¥ï¼Œè¿”å›å‡½æ•°
     }
 
-    Write-Host "ÏÂÔØÍê³É£¬ÕıÔÚ½âÑ¹..."
+    Write-Host "ä¸‹è½½å®Œæˆï¼Œæ­£åœ¨è§£å‹..."
     try {
-        # Expand-Archive ÊÇ PowerShell ½âÑ¹ ZIP ÎÄ¼şµÄ Cmdlet¡£
+        # Expand-Archive æ˜¯ PowerShell è§£å‹ ZIP æ–‡ä»¶çš„ Cmdletã€‚
         Expand-Archive -Path $temp_ladefree_archive -DestinationPath $ladefree_temp_download_dir -Force
     } catch {
-        Write-Host-Red "´íÎó£º½âÑ¹ Ladefree ZIP °üÊ§°Ü¡£ÇëÈ·±£ 'Expand-Archive' ¹¦ÄÜ¿ÉÓÃ£¨PowerShell 5.0+ ÄÚÖÃ£©¡£"
+        Write-Host-Red "é”™è¯¯ï¼šè§£å‹ Ladefree ZIP åŒ…å¤±è´¥ã€‚è¯·ç¡®ä¿ 'Expand-Archive' åŠŸèƒ½å¯ç”¨ï¼ˆPowerShell 5.0+ å†…ç½®ï¼‰ã€‚"
         Remove-Item -Path $ladefree_temp_download_dir -Recurse -Force -ErrorAction SilentlyContinue
-        return # ½âÑ¹Ê§°Ü£¬·µ»Øº¯Êı
+        return # è§£å‹å¤±è´¥ï¼Œè¿”å›å‡½æ•°
     }
 
-    # ²éÕÒ½âÑ¹ºóµÄÓ¦ÓÃ³ÌĞòÄ¿Â¼ (ÀıÈç£¬ladefree-main)¡£
-    # Get-ChildItem -Directory ½ö»ñÈ¡Ä¿Â¼£¬-Filter "ladefree-*" °´Ãû³Æ¹ıÂË¡£
-    # Select-Object -ExpandProperty FullName ½öÑ¡ÔñÍêÕûÂ·¾¶¡£
-    # Select-Object -First 1 È·±£Ö»È¡µÚÒ»¸öÆ¥ÅäÏî¡£
+    # æŸ¥æ‰¾è§£å‹åçš„åº”ç”¨ç¨‹åºç›®å½• (ä¾‹å¦‚ï¼Œladefree-main)ã€‚
+    # Get-ChildItem -Directory ä»…è·å–ç›®å½•ï¼Œ-Filter "ladefree-*" æŒ‰åç§°è¿‡æ»¤ã€‚
+    # Select-Object -ExpandProperty FullName ä»…é€‰æ‹©å®Œæ•´è·¯å¾„ã€‚
+    # Select-Object -First 1 ç¡®ä¿åªå–ç¬¬ä¸€ä¸ªåŒ¹é…é¡¹ã€‚
     $extracted_app_path = Get-ChildItem -Path $ladefree_temp_download_dir -Directory -Filter "ladefree-*" | Select-Object -ExpandProperty FullName | Select-Object -First 1
 
     if ([string]::IsNullOrWhiteSpace($extracted_app_path)) {
-        Write-Host-Red "´íÎó£ºÎ´ÔÚÁÙÊ±ÏÂÔØÄ¿Â¼ÖĞÕÒµ½½âÑ¹ºóµÄ Ladefree Ó¦ÓÃ³ÌĞòÄ¿Â¼¡£"
+        Write-Host-Red "é”™è¯¯ï¼šæœªåœ¨ä¸´æ—¶ä¸‹è½½ç›®å½•ä¸­æ‰¾åˆ°è§£å‹åçš„ Ladefree åº”ç”¨ç¨‹åºç›®å½•ã€‚"
         Remove-Item -Path $ladefree_temp_download_dir -Recurse -Force -ErrorAction SilentlyContinue
-        return # Î´ÕÒµ½Ä¿Â¼£¬·µ»Øº¯Êı
+        return # æœªæ‰¾åˆ°ç›®å½•ï¼Œè¿”å›å‡½æ•°
     }
 
-    Write-Host-Blue "ÕıÔÚ´Ó±¾µØ½âÑ¹Â·¾¶ $extracted_app_path ²¿Êğµ½ Lade£º$LADE_APP_NAME ..."
-    Push-Location $extracted_app_path # ¸ü¸Äµ±Ç°¹¤×÷Ä¿Â¼µ½½âÑ¹Â·¾¶
+    Write-Host-Blue "æ­£åœ¨ä»æœ¬åœ°è§£å‹è·¯å¾„ $extracted_app_path éƒ¨ç½²åˆ° Ladeï¼š$LADE_APP_NAME ..."
+    Push-Location $extracted_app_path # æ›´æ”¹å½“å‰å·¥ä½œç›®å½•åˆ°è§£å‹è·¯å¾„
     try {
-        & lade deploy --app "$LADE_APP_NAME" # Ö´ĞĞ²¿ÊğÃüÁî
-        $deploy_status = $LASTEXITCODE # »ñÈ¡Íâ²¿ÃüÁîµÄÍË³ö´úÂë
+        & lade deploy --app "$LADE_APP_NAME" # æ‰§è¡Œéƒ¨ç½²å‘½ä»¤
+        $deploy_status = $LASTEXITCODE # è·å–å¤–éƒ¨å‘½ä»¤çš„é€€å‡ºä»£ç 
     } catch {
-        Write-Host-Red "´íÎó£ºLade Ó¦ÓÃ²¿ÊğÊ§°Ü¡£Çë¼ì²é Ladefree ´úÂë±¾ÉíµÄÎÊÌâ»ò Lade Æ½Ì¨ÈÕÖ¾¡£"
-        Pop-Location # »Ö¸´µ½Ö®Ç°µÄÄ¿Â¼
+        Write-Host-Red "é”™è¯¯ï¼šLade åº”ç”¨éƒ¨ç½²å¤±è´¥ã€‚è¯·æ£€æŸ¥ Ladefree ä»£ç æœ¬èº«çš„é—®é¢˜æˆ– Lade å¹³å°æ—¥å¿—ã€‚"
+        Pop-Location # æ¢å¤åˆ°ä¹‹å‰çš„ç›®å½•
         Remove-Item -Path $ladefree_temp_download_dir -Recurse -Force -ErrorAction SilentlyContinue
-        return # ²¿ÊğÊ§°Ü£¬·µ»Øº¯Êı
+        return # éƒ¨ç½²å¤±è´¥ï¼Œè¿”å›å‡½æ•°
     }
-    Pop-Location # »Ö¸´µ½Ö®Ç°µÄÄ¿Â¼
+    Pop-Location # æ¢å¤åˆ°ä¹‹å‰çš„ç›®å½•
 
-    Write-Host "ÇåÀíÁÙÊ±ÏÂÔØÄ¿Â¼ $ladefree_temp_download_dir..."
+    Write-Host "æ¸…ç†ä¸´æ—¶ä¸‹è½½ç›®å½• $ladefree_temp_download_dir..."
     Remove-Item -Path $ladefree_temp_download_dir -Recurse -Force -ErrorAction SilentlyContinue
 
     if ($deploy_status -ne 0) {
-        Write-Host-Red "´íÎó£ºLade Ó¦ÓÃ²¿ÊğÊ§°Ü¡£Çë¼ì²é Ladefree ´úÂëÎÊÌâ»ò Lade Æ½Ì¨ÈÕÖ¾¡£"
-        return # ²¿ÊğÊ§°Ü£¬·µ»Øº¯Êı
+        Write-Host-Red "é”™è¯¯ï¼šLade åº”ç”¨éƒ¨ç½²å¤±è´¥ã€‚è¯·æ£€æŸ¥ Ladefree ä»£ç é—®é¢˜æˆ– Lade å¹³å°æ—¥å¿—ã€‚"
+        return # éƒ¨ç½²å¤±è´¥ï¼Œè¿”å›å‡½æ•°
     }
-    Write-Host-Green "Lade Ó¦ÓÃ²¿Êğ³É¹¦£¡"
+    Write-Host-Green "Lade åº”ç”¨éƒ¨ç½²æˆåŠŸï¼"
 
     Write-Host ""
-    Write-Host-Cyan "--- ²¿ÊğÍê³É ---"
+    Write-Host-Cyan "--- éƒ¨ç½²å®Œæˆ ---"
 }
 
-# --- ¹¦ÄÜº¯Êı£º²é¿´ËùÓĞÓ¦ÓÃ ---
+# --- åŠŸèƒ½å‡½æ•°ï¼šæŸ¥çœ‹æ‰€æœ‰åº”ç”¨ ---
 Function View-Apps {
-    Display-SectionHeader "²é¿´ËùÓĞ Lade Ó¦ÓÃ"
+    Display-SectionHeader "æŸ¥çœ‹æ‰€æœ‰ Lade åº”ç”¨"
 
-    Ensure-LadeLogin # È·±£ÓÃ»§ÒÑµÇÂ¼
+    Ensure-LadeLogin # ç¡®ä¿ç”¨æˆ·å·²ç™»å½•
 
     try {
-        & lade apps list # Ö´ĞĞ²é¿´Ó¦ÓÃÁĞ±íÃüÁî
+        & lade apps list # æ‰§è¡ŒæŸ¥çœ‹åº”ç”¨åˆ—è¡¨å‘½ä»¤
     } catch {
-        Write-Host-Red "´íÎó£ºÎŞ·¨»ñÈ¡Ó¦ÓÃÁĞ±í¡£Çë¼ì²éÍøÂç»ò Lade CLI ×´Ì¬¡£"
+        Write-Host-Red "é”™è¯¯ï¼šæ— æ³•è·å–åº”ç”¨åˆ—è¡¨ã€‚è¯·æ£€æŸ¥ç½‘ç»œæˆ– Lade CLI çŠ¶æ€ã€‚"
     }
 }
 
-# --- ¹¦ÄÜº¯Êı£ºÉ¾³ıÓ¦ÓÃ ---
+# --- åŠŸèƒ½å‡½æ•°ï¼šåˆ é™¤åº”ç”¨ ---
 Function Delete-App {
-    Display-SectionHeader "É¾³ı Lade Ó¦ÓÃ"
+    Display-SectionHeader "åˆ é™¤ Lade åº”ç”¨"
 
-    Ensure-LadeLogin # È·±£ÓÃ»§ÒÑµÇÂ¼
+    Ensure-LadeLogin # ç¡®ä¿ç”¨æˆ·å·²ç™»å½•
 
-    $APP_TO_DELETE = Read-Host "ÇëÊäÈëÄúÒªÉ¾³ıµÄ Lade Ó¦ÓÃÃû³Æ:"
+    $APP_TO_DELETE = Read-Host "è¯·è¾“å…¥æ‚¨è¦åˆ é™¤çš„ Lade åº”ç”¨åç§°:"
     if ([string]::IsNullOrWhiteSpace($APP_TO_DELETE)) {
-        Write-Host-Yellow "Ó¦ÓÃÃû³Æ²»ÄÜÎª¿Õ¡£È¡ÏûÉ¾³ı¡£"
+        Write-Host-Yellow "åº”ç”¨åç§°ä¸èƒ½ä¸ºç©ºã€‚å–æ¶ˆåˆ é™¤ã€‚"
         return
     }
 
-    Write-Host-Red "¾¯¸æ£ºÄú¼´½«É¾³ıÓ¦ÓÃ '$APP_TO_DELETE'¡£´Ë²Ù×÷²»¿É³·Ïú£¡"
-    $CONFIRM_DELETE = Read-Host "È·¶¨ÒªÉ¾³ıÂğ£¿ (y/N):"
-    $CONFIRM_DELETE = $CONFIRM_DELETE.ToLower() # ½«ÊäÈë×ª»»ÎªĞ¡Ğ´
+    Write-Host-Red "è­¦å‘Šï¼šæ‚¨å³å°†åˆ é™¤åº”ç”¨ '$APP_TO_DELETE'ã€‚æ­¤æ“ä½œä¸å¯æ’¤é”€ï¼"
+    $CONFIRM_DELETE = Read-Host "ç¡®å®šè¦åˆ é™¤å—ï¼Ÿ (y/N):"
+    $CONFIRM_DELETE = $CONFIRM_DELETE.ToLower() # å°†è¾“å…¥è½¬æ¢ä¸ºå°å†™
 
     if ($CONFIRM_DELETE -eq "y") {
         try {
-            & lade apps remove "$APP_TO_DELETE" # ½« 'delete' ¸ü¸ÄÎª 'remove'
-            Write-Host-Green "Ó¦ÓÃ '$APP_TO_DELETE' ÒÑ³É¹¦É¾³ı¡£"
+            & lade apps remove "$APP_TO_DELETE" # å°† 'delete' æ›´æ”¹ä¸º 'remove'
+            Write-Host-Green "åº”ç”¨ '$APP_TO_DELETE' å·²æˆåŠŸåˆ é™¤ã€‚"
         } catch {
-            Write-Host-Red "´íÎó£ºÉ¾³ıÓ¦ÓÃ '$APP_TO_DELETE' Ê§°Ü¡£Çë¼ì²éÓ¦ÓÃÃû³ÆÊÇ·ñÕıÈ·»òÄúÊÇ·ñÓĞÈ¨ÏŞ¡£"
+            Write-Host-Red "é”™è¯¯ï¼šåˆ é™¤åº”ç”¨ '$APP_TO_DELETE' å¤±è´¥ã€‚è¯·æ£€æŸ¥åº”ç”¨åç§°æ˜¯å¦æ­£ç¡®æˆ–æ‚¨æ˜¯å¦æœ‰æƒé™ã€‚"
         }
     } else {
-        Write-Host-Yellow "È¡ÏûÉ¾³ı²Ù×÷¡£"
+        Write-Host-Yellow "å–æ¶ˆåˆ é™¤æ“ä½œã€‚"
     }
 }
 
-# --- ¹¦ÄÜº¯Êı£º²é¿´Ó¦ÓÃÈÕÖ¾ ---
+# --- åŠŸèƒ½å‡½æ•°ï¼šæŸ¥çœ‹åº”ç”¨æ—¥å¿— ---
 Function View-AppLogs {
-    Display-SectionHeader "²é¿´ Lade Ó¦ÓÃÈÕÖ¾"
+    Display-SectionHeader "æŸ¥çœ‹ Lade åº”ç”¨æ—¥å¿—"
 
-    Ensure-LadeLogin # È·±£ÓÃ»§ÒÑµÇÂ¼
+    Ensure-LadeLogin # ç¡®ä¿ç”¨æˆ·å·²ç™»å½•
 
-    $APP_FOR_LOGS = Read-Host "ÇëÊäÈëÄúÒª²é¿´ÈÕÖ¾µÄ Lade Ó¦ÓÃÃû³Æ:"
+    $APP_FOR_LOGS = Read-Host "è¯·è¾“å…¥æ‚¨è¦æŸ¥çœ‹æ—¥å¿—çš„ Lade åº”ç”¨åç§°:"
     if ([string]::IsNullOrWhiteSpace($APP_FOR_LOGS)) {
-        Write-Host-Yellow "Ó¦ÓÃÃû³Æ²»ÄÜÎª¿Õ¡£È¡Ïû²é¿´ÈÕÖ¾¡£"
+        Write-Host-Yellow "åº”ç”¨åç§°ä¸èƒ½ä¸ºç©ºã€‚å–æ¶ˆæŸ¥çœ‹æ—¥å¿—ã€‚"
         return
     }
 
-    Write-Host-Cyan "ÕıÔÚ²é¿´Ó¦ÓÃ '$APP_FOR_LOGS' µÄÊµÊ±ÈÕÖ¾ (°´ Ctrl+C Í£Ö¹)..."
+    Write-Host-Cyan "æ­£åœ¨æŸ¥çœ‹åº”ç”¨ '$APP_FOR_LOGS' çš„å®æ—¶æ—¥å¿— (æŒ‰ Ctrl+C åœæ­¢)..."
     try {
-        # lade logs µÄ -f ±êÖ¾Í¨³£±íÊ¾¡°¸úËæ¡±ÈÕÖ¾Êä³ö
+        # lade logs çš„ -f æ ‡å¿—é€šå¸¸è¡¨ç¤ºâ€œè·Ÿéšâ€æ—¥å¿—è¾“å‡º
         & lade logs -a "$APP_FOR_LOGS" -f
     } catch {
-        Write-Host-Red "´íÎó£ºÎŞ·¨»ñÈ¡Ó¦ÓÃ '$APP_FOR_LOGS' µÄÈÕÖ¾¡£Çë¼ì²éÓ¦ÓÃÃû³ÆÊÇ·ñÕıÈ·»òÓ¦ÓÃÊÇ·ñÕıÔÚÔËĞĞ¡£"
+        Write-Host-Red "é”™è¯¯ï¼šæ— æ³•è·å–åº”ç”¨ '$APP_FOR_LOGS' çš„æ—¥å¿—ã€‚è¯·æ£€æŸ¥åº”ç”¨åç§°æ˜¯å¦æ­£ç¡®æˆ–åº”ç”¨æ˜¯å¦æ­£åœ¨è¿è¡Œã€‚"
     }
 }
 
-# --- ³õÊ¼»¯²½Öè (È·±£ Lade CLI ÒÑ°²×°) ---
+# --- åˆå§‹åŒ–æ­¥éª¤ (ç¡®ä¿ Lade CLI å·²å®‰è£…) ---
 Function Install-LadeCli {
-    Display-SectionHeader "¼ì²é»ò°²×° Lade CLI"
+    Display-SectionHeader "æ£€æŸ¥æˆ–å®‰è£… Lade CLI"
 
     if (Test-LadeCli) {
-        Write-Host-Green "Lade CLI ÒÑ°²×°£º$(Get-Command $LADE_CLI_NAME).Path"
-        return $true # Lade CLI ÒÑ¾­´æÔÚ£¬·µ»Ø true
+        Write-Host-Green "Lade CLI å·²å®‰è£…ï¼š$(Get-Command $LADE_CLI_NAME).Path"
+        return $true # Lade CLI å·²ç»å­˜åœ¨ï¼Œè¿”å› true
     }
 
-    Write-Host-Yellow "Lade CLI Î´°²×°¡£ÕıÔÚ³¢ÊÔ×Ô¶¯°²×° Lade CLI..."
+    Write-Host-Yellow "Lade CLI æœªå®‰è£…ã€‚æ­£åœ¨å°è¯•è‡ªåŠ¨å®‰è£… Lade CLI..."
 
     $lade_release_url = "https://github.com/lade-io/lade/releases"
     $lade_temp_dir = Join-Path $env:TEMP "lade_cli_download_temp_$(Get-Random)"
     New-Item -ItemType Directory -Force -Path $lade_temp_dir | Out-Null
 
-    $os_type = "windows" # ÔÚ Windows ÉÏÓ²±àÂëÎª "windows"
-    # Get-WmiObject Win32_Processor »ñÈ¡´¦ÀíÆ÷ĞÅÏ¢£¬Architecture ÊôĞÔ±íÊ¾¼Ü¹¹ÀàĞÍ¡£
+    $os_type = "windows" # åœ¨ Windows ä¸Šç¡¬ç¼–ç ä¸º "windows"
+    # Get-WmiObject Win32_Processor è·å–å¤„ç†å™¨ä¿¡æ¯ï¼ŒArchitecture å±æ€§è¡¨ç¤ºæ¶æ„ç±»å‹ã€‚
     $arch_type = (Get-WmiObject Win32_Processor).Architecture
 
     $arch_suffix = ""
-    # ¸ù¾İ´¦ÀíÆ÷¼Ü¹¹ÉèÖÃÏÂÔØÎÄ¼şÃûºó×º
+    # æ ¹æ®å¤„ç†å™¨æ¶æ„è®¾ç½®ä¸‹è½½æ–‡ä»¶ååç¼€
     switch ($arch_type) {
-        0 { $arch_suffix = "-amd64" } # x86 ¼Ü¹¹
-        9 { $arch_suffix = "-amd64" } # x64 ¼Ü¹¹
-        6 { $arch_suffix = "-arm64" } # ARM64 ¼Ü¹¹
+        0 { $arch_suffix = "-amd64" } # x86 æ¶æ„
+        9 { $arch_suffix = "-amd64" } # x64 æ¶æ„
+        6 { $arch_suffix = "-arm64" } # ARM64 æ¶æ„
         default {
-            Write-Host-Red "´íÎó£º²»Ö§³ÖµÄ Windows ¼Ü¹¹£º$arch_type"
+            Write-Host-Red "é”™è¯¯ï¼šä¸æ”¯æŒçš„ Windows æ¶æ„ï¼š$arch_type"
             Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
             exit 1
         }
     }
-    Write-Host-Blue "¼ì²âµ½ Windows ($((Get-WmiObject Win32_Processor).Caption)) ¼Ü¹¹¡£"
+    Write-Host-Blue "æ£€æµ‹åˆ° Windows ($((Get-WmiObject Win32_Processor).Caption)) æ¶æ„ã€‚"
 
-    # ¼ì²é±ØÒªµÄ¹¤¾ß£ºInvoke-WebRequest (PowerShell ÄÚÖÃ) »ò curl.exe (Èç¹ûÓÃ»§°²×°ÁË)
+    # æ£€æŸ¥å¿…è¦çš„å·¥å…·ï¼šInvoke-WebRequest (PowerShell å†…ç½®) æˆ– curl.exe (å¦‚æœç”¨æˆ·å®‰è£…äº†)
     if (-not (Test-CommandExists "curl.exe") -and -not (Test-CommandExists "Invoke-WebRequest")) {
-        Write-Host-Red "´íÎó£ºÎ´ÕÒµ½ 'curl.exe' »ò 'Invoke-WebRequest' (PowerShell µÄÍøÂç¿Í»§¶Ë)¡£ÇëÈ·±£ PowerShell ÒÑ¸üĞÂ»ò curl ÒÑ°²×°¡£"
+        Write-Host-Red "é”™è¯¯ï¼šæœªæ‰¾åˆ° 'curl.exe' æˆ– 'Invoke-WebRequest' (PowerShell çš„ç½‘ç»œå®¢æˆ·ç«¯)ã€‚è¯·ç¡®ä¿ PowerShell å·²æ›´æ–°æˆ– curl å·²å®‰è£…ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
-    # ¼ì²é Expand-Archive (PowerShell ÄÚÖÃ)
+    # æ£€æŸ¥ Expand-Archive (PowerShell å†…ç½®)
     if (-not (Test-CommandExists "Expand-Archive")) {
-        Write-Host-Red "´íÎó£ºÎ´ÕÒµ½ 'Expand-Archive' (PowerShell µÄ½âÑ¹ÃüÁî)¡£ÇëÈ·±£ PowerShell 5.0+ ÒÑ°²×°¡£"
+        Write-Host-Red "é”™è¯¯ï¼šæœªæ‰¾åˆ° 'Expand-Archive' (PowerShell çš„è§£å‹å‘½ä»¤)ã€‚è¯·ç¡®ä¿ PowerShell 5.0+ å·²å®‰è£…ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
 
-    Write-Host "ÕıÔÚ»ñÈ¡×îĞÂ°æ±¾µÄ Lade CLI..."
+    Write-Host "æ­£åœ¨è·å–æœ€æ–°ç‰ˆæœ¬çš„ Lade CLI..."
     try {
-        # Invoke-RestMethod ÓÃÓÚµ÷ÓÃ RESTful Web ·şÎñ£¬»ñÈ¡ GitHub API µÄ JSON ÏìÓ¦¡£
+        # Invoke-RestMethod ç”¨äºè°ƒç”¨ RESTful Web æœåŠ¡ï¼Œè·å– GitHub API çš„ JSON å“åº”ã€‚
         $latest_release_info = Invoke-RestMethod -Uri "https://api.github.com/repos/lade-io/lade/releases/latest"
-        $latest_release_tag = $latest_release_info.tag_name # ´Ó JSON ÏìÓ¦ÖĞÌáÈ¡ tag_name
+        $latest_release_tag = $latest_release_info.tag_name # ä» JSON å“åº”ä¸­æå– tag_name
     } catch {
-        Write-Host-Red "´íÎó£ºÎŞ·¨»ñÈ¡×îĞÂ°æ±¾µÄ Lade CLI¡£Çë¼ì²éÍøÂç»ò GitHub API ÏŞÖÆ¡£"
+        Write-Host-Red "é”™è¯¯ï¼šæ— æ³•è·å–æœ€æ–°ç‰ˆæœ¬çš„ Lade CLIã€‚è¯·æ£€æŸ¥ç½‘ç»œæˆ– GitHub API é™åˆ¶ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
 
     if ([string]::IsNullOrWhiteSpace($latest_release_tag)) {
-        Write-Host-Red "´íÎó£ºÎŞ·¨È·¶¨×îĞÂ Lade CLI °æ±¾¡£"
+        Write-Host-Red "é”™è¯¯ï¼šæ— æ³•ç¡®å®šæœ€æ–° Lade CLI ç‰ˆæœ¬ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
     $lade_version = $latest_release_tag
-    Write-Host-Green "¼ì²âµ½×îĞÂ°æ±¾£º$lade_version"
+    Write-Host-Green "æ£€æµ‹åˆ°æœ€æ–°ç‰ˆæœ¬ï¼š$lade_version"
 
-    $filename_to_download = "lade-${os_type}${arch_suffix}.zip" # Lade CLI for Windows Í¨³£ÊÇ .zip
+    $filename_to_download = "lade-${os_type}${arch_suffix}.zip" # Lade CLI for Windows é€šå¸¸æ˜¯ .zip
     $download_url = "$lade_release_url/download/$lade_version/$filename_to_download"
     $temp_archive = Join-Path $lade_temp_dir $filename_to_download
 
-    Write-Host "ÏÂÔØ URL: $download_url"
-    Write-Host "ÕıÔÚÏÂÔØ $filename_to_download µ½ $temp_archive..."
+    Write-Host "ä¸‹è½½ URL: $download_url"
+    Write-Host "æ­£åœ¨ä¸‹è½½ $filename_to_download åˆ° $temp_archive..."
     try {
-        Invoke-WebRequest -Uri $download_url -OutFile $temp_archive # ÏÂÔØÎÄ¼ş
+        Invoke-WebRequest -Uri $download_url -OutFile $temp_archive # ä¸‹è½½æ–‡ä»¶
     } catch {
-        Write-Host-Red "´íÎó£ºÏÂÔØ Lade CLI Ê§°Ü¡£Çë¼ì²éÍøÂçÁ¬½Ó»ò URL ÊÇ·ñÕıÈ·¡£"
+        Write-Host-Red "é”™è¯¯ï¼šä¸‹è½½ Lade CLI å¤±è´¥ã€‚è¯·æ£€æŸ¥ç½‘ç»œè¿æ¥æˆ– URL æ˜¯å¦æ­£ç¡®ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
 
-    Write-Host "ÏÂÔØÍê³É£¬ÕıÔÚ½âÑ¹..."
+    Write-Host "ä¸‹è½½å®Œæˆï¼Œæ­£åœ¨è§£å‹..."
     try {
-        Expand-Archive -Path $temp_archive -DestinationPath $lade_temp_dir -Force # ½âÑ¹ ZIP ÎÄ¼ş
+        Expand-Archive -Path $temp_archive -DestinationPath $lade_temp_dir -Force # è§£å‹ ZIP æ–‡ä»¶
     } catch {
-        Write-Host-Red "´íÎó£º½âÑ¹ ZIP ÎÄ¼şÊ§°Ü¡£ÇëÈ·±£ 'Expand-Archive' Cmdlet ¿ÉÓÃ (PowerShell 5.0+)¡£"
+        Write-Host-Red "é”™è¯¯ï¼šè§£å‹ ZIP æ–‡ä»¶å¤±è´¥ã€‚è¯·ç¡®ä¿ 'Expand-Archive' Cmdlet å¯ç”¨ (PowerShell 5.0+)ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
 
-    # ÔÚ½âÑ¹ºóµÄÄ¿Â¼ÖĞ²éÕÒ Lade CLI ¿ÉÖ´ĞĞÎÄ¼ş¡£
-    # -Recurse µİ¹éËÑË÷×ÓÄ¿Â¼£¬-File ½ö²éÕÒÎÄ¼ş£¬-Filter ¹ıÂËÎÄ¼şÃû¡£
+    # åœ¨è§£å‹åçš„ç›®å½•ä¸­æŸ¥æ‰¾ Lade CLI å¯æ‰§è¡Œæ–‡ä»¶ã€‚
+    # -Recurse é€’å½’æœç´¢å­ç›®å½•ï¼Œ-File ä»…æŸ¥æ‰¾æ–‡ä»¶ï¼Œ-Filter è¿‡æ»¤æ–‡ä»¶åã€‚
     $extracted_lade_path = Get-ChildItem -Path $lade_temp_dir -Recurse -File -Filter $LADE_CLI_NAME | Select-Object -ExpandProperty FullName | Select-Object -First 1
 
     if ([string]::IsNullOrWhiteSpace($extracted_lade_path)) {
-        Write-Host-Red "´íÎó£ºÔÚ½âÑ¹ºóµÄÁÙÊ±Ä¿Â¼ÖĞÎ´ÕÒµ½ '$LADE_CLI_NAME' ¿ÉÖ´ĞĞÎÄ¼ş¡£Çë¼ì²éÑ¹Ëõ°üÄÚÈİ¡£"
+        Write-Host-Red "é”™è¯¯ï¼šåœ¨è§£å‹åçš„ä¸´æ—¶ç›®å½•ä¸­æœªæ‰¾åˆ° '$LADE_CLI_NAME' å¯æ‰§è¡Œæ–‡ä»¶ã€‚è¯·æ£€æŸ¥å‹ç¼©åŒ…å†…å®¹ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
 
-    # È·±£Ä¿±ê°²×°Â·¾¶´æÔÚ
+    # ç¡®ä¿ç›®æ ‡å®‰è£…è·¯å¾„å­˜åœ¨
     if (-not (Test-Path $LADE_INSTALL_PATH)) {
         New-Item -ItemType Directory -Force -Path $LADE_INSTALL_PATH | Out-Null
     }
 
-    Write-Host "ÕıÔÚ½« Lade CLI ÒÆ¶¯µ½ $LADE_INSTALL_PATH..."
+    Write-Host "æ­£åœ¨å°† Lade CLI ç§»åŠ¨åˆ° $LADE_INSTALL_PATH..."
     try {
-        # Move-Item ÒÆ¶¯ÎÄ¼ş¡£-Force Ç¿ÖÆ¸²¸ÇÄ¿±ê£¨Èç¹û´æÔÚ£©¡£
+        # Move-Item ç§»åŠ¨æ–‡ä»¶ã€‚-Force å¼ºåˆ¶è¦†ç›–ç›®æ ‡ï¼ˆå¦‚æœå­˜åœ¨ï¼‰ã€‚
         Move-Item -Path $extracted_lade_path -Destination (Join-Path $LADE_INSTALL_PATH $LADE_CLI_NAME) -Force
     } catch {
-        Write-Host-Red "´íÎó£ºÒÆ¶¯ Lade CLI ÎÄ¼şÊ§°Ü¡£¿ÉÄÜĞèÒª¹ÜÀíÔ±È¨ÏŞ»òÄ¿Â¼²»´æÔÚ¡£"
+        Write-Host-Red "é”™è¯¯ï¼šç§»åŠ¨ Lade CLI æ–‡ä»¶å¤±è´¥ã€‚å¯èƒ½éœ€è¦ç®¡ç†å‘˜æƒé™æˆ–ç›®å½•ä¸å­˜åœ¨ã€‚"
         Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
         exit 1
     }
 
-    # ½« Lade CLI Ìí¼Óµ½ÏµÍ³ PATH »·¾³±äÁ¿ (Èç¹ûÉĞÎ´Ìí¼Ó)
-    # ÕâÍ¨³£ĞèÒª¹ÜÀíÔ±È¨ÏŞ²ÅÄÜĞŞ¸Ä»úÆ÷¼¶±ğµÄ»·¾³±äÁ¿¡£
+    # å°† Lade CLI æ·»åŠ åˆ°ç³»ç»Ÿ PATH ç¯å¢ƒå˜é‡ (å¦‚æœå°šæœªæ·»åŠ )
+    # è¿™é€šå¸¸éœ€è¦ç®¡ç†å‘˜æƒé™æ‰èƒ½ä¿®æ”¹æœºå™¨çº§åˆ«çš„ç¯å¢ƒå˜é‡ã€‚
     try {
-        # [Environment]::GetEnvironmentVariable »ñÈ¡»·¾³±äÁ¿¡£
+        # [Environment]::GetEnvironmentVariable è·å–ç¯å¢ƒå˜é‡ã€‚
         $currentPath = [Environment]::GetEnvironmentVariable("Path", "Machine")
-        # ¼ì²é PATH ÖĞÊÇ·ñÒÑ°üº¬°²×°Â·¾¶¡£
+        # æ£€æŸ¥ PATH ä¸­æ˜¯å¦å·²åŒ…å«å®‰è£…è·¯å¾„ã€‚
         if (-not ($currentPath -split ';' -contains $LADE_INSTALL_PATH)) {
-            Write-Host-Yellow "ÕıÔÚ½« '$LADE_INSTALL_PATH' Ìí¼Óµ½ÏµÍ³ PATH¡£ÕâĞèÒª¹ÜÀíÔ±È¨ÏŞ¡£"
+            Write-Host-Yellow "æ­£åœ¨å°† '$LADE_INSTALL_PATH' æ·»åŠ åˆ°ç³»ç»Ÿ PATHã€‚è¿™éœ€è¦ç®¡ç†å‘˜æƒé™ã€‚"
             $newPath = "$currentPath;$LADE_INSTALL_PATH"
-            # [Environment]::SetEnvironmentVariable ÉèÖÃ»·¾³±äÁ¿¡£
+            # [Environment]::SetEnvironmentVariable è®¾ç½®ç¯å¢ƒå˜é‡ã€‚
             [Environment]::SetEnvironmentVariable("Path", $newPath, "Machine")
-            Write-Host-Green "Lade CLI °²×°Â·¾¶ÒÑÌí¼Óµ½ÏµÍ³ PATH¡£Äú¿ÉÄÜĞèÒªÖØĞÂÆô¶¯ PowerShell »á»°²ÅÄÜÊ¹ÆäÉúĞ§¡£"
+            Write-Host-Green "Lade CLI å®‰è£…è·¯å¾„å·²æ·»åŠ åˆ°ç³»ç»Ÿ PATHã€‚æ‚¨å¯èƒ½éœ€è¦é‡æ–°å¯åŠ¨ PowerShell ä¼šè¯æ‰èƒ½ä½¿å…¶ç”Ÿæ•ˆã€‚"
         }
     } catch {
-        Write-Host-Yellow "¾¯¸æ£ºÎŞ·¨½« Lade CLI Â·¾¶Ìí¼Óµ½ÏµÍ³ PATH »·¾³±äÁ¿¡£ÇëÊÖ¶¯Ìí¼Ó '$LADE_INSTALL_PATH' µ½ÄúµÄ PATH£¬ÒÔ±ã´ÓÈÎºÎÎ»ÖÃÔËĞĞ 'lade' ÃüÁî¡£"
+        Write-Host-Yellow "è­¦å‘Šï¼šæ— æ³•å°† Lade CLI è·¯å¾„æ·»åŠ åˆ°ç³»ç»Ÿ PATH ç¯å¢ƒå˜é‡ã€‚è¯·æ‰‹åŠ¨æ·»åŠ  '$LADE_INSTALL_PATH' åˆ°æ‚¨çš„ PATHï¼Œä»¥ä¾¿ä»ä»»ä½•ä½ç½®è¿è¡Œ 'lade' å‘½ä»¤ã€‚"
     }
 
-    Write-Host-Green "Lade CLI ÒÑ³É¹¦ÏÂÔØ¡¢½âÑ¹²¢°²×°µ½ $LADE_INSTALL_PATH"
+    Write-Host-Green "Lade CLI å·²æˆåŠŸä¸‹è½½ã€è§£å‹å¹¶å®‰è£…åˆ° $LADE_INSTALL_PATH"
     Remove-Item -Path $lade_temp_dir -Recurse -Force -ErrorAction SilentlyContinue
-    return $true # Lade CLI °²×°³É¹¦
+    return $true # Lade CLI å®‰è£…æˆåŠŸ
 }
 
 
-# --- Ö÷ÒªÖ´ĞĞÁ÷³Ì ---
+# --- ä¸»è¦æ‰§è¡Œæµç¨‹ ---
 
-# ÏÔÊ¾»¶Ó­Ò³Ãæ
+# æ˜¾ç¤ºæ¬¢è¿é¡µé¢
 Display-Welcome
 
-# 2. È·±£ Lade CLI ÒÑ°²×°
-# Èç¹û Install-LadeCli ·µ»Ø false (°²×°Ê§°Ü)£¬ÔòÍË³ö½Å±¾¡£
+# 2. ç¡®ä¿ Lade CLI å·²å®‰è£…
+# å¦‚æœ Install-LadeCli è¿”å› false (å®‰è£…å¤±è´¥)ï¼Œåˆ™é€€å‡ºè„šæœ¬ã€‚
 if (-not (Install-LadeCli)) {
-    Write-Host-Red "´íÎó£ºLade CLI °²×°Ê§°Ü¡£½Å±¾½«ÍË³ö¡£"
+    Write-Host-Red "é”™è¯¯ï¼šLade CLI å®‰è£…å¤±è´¥ã€‚è„šæœ¬å°†é€€å‡ºã€‚"
     exit 1
 }
 
-# --- Ö÷²Ëµ¥ ---
-while ($true) { # ÎŞÏŞÑ­»·£¬Ö±µ½ÓÃ»§Ñ¡ÔñÍË³ö
+# --- ä¸»èœå• ---
+while ($true) { # æ— é™å¾ªç¯ï¼Œç›´åˆ°ç”¨æˆ·é€‰æ‹©é€€å‡º
     Write-Host ""
     Write-Host-Cyan "#############################################################"
-    Write-Host-Cyan "#          " -NoNewline; Write-Host-Blue "Lade ¹ÜÀíÖ÷²Ëµ¥" -NoNewline; Write-Host-Cyan "                          #"
+    Write-Host-Cyan "#          " -NoNewline; Write-Host-Blue "Lade ç®¡ç†ä¸»èœå•" -NoNewline; Write-Host-Cyan "                          #"
     Write-Host-Cyan "#############################################################"
-    Write-Host-Green "1. " -NoNewline; Write-Host "²¿Êğ Ladefree Ó¦ÓÃ"
-    Write-Host-Green "2. " -NoNewline; Write-Host "²é¿´ËùÓĞ Lade Ó¦ÓÃ"
-    Write-Host-Green "3. " -NoNewline; Write-Host "É¾³ı Lade Ó¦ÓÃ"
-    Write-Host-Green "4. " -NoNewline; Write-Host "²é¿´Ó¦ÓÃÈÕÖ¾"
-    Write-Host-Green "5. " -NoNewline; Write-Host "Ë¢ĞÂ Lade µÇÂ¼×´Ì¬"
-    Write-Host-Red "6. " -NoNewline; Write-Host "ÍË³ö"
+    Write-Host-Green "1. " -NoNewline; Write-Host "éƒ¨ç½² Ladefree åº”ç”¨"
+    Write-Host-Green "2. " -NoNewline; Write-Host "æŸ¥çœ‹æ‰€æœ‰ Lade åº”ç”¨"
+    Write-Host-Green "3. " -NoNewline; Write-Host "åˆ é™¤ Lade åº”ç”¨"
+    Write-Host-Green "4. " -NoNewline; Write-Host "æŸ¥çœ‹åº”ç”¨æ—¥å¿—"
+    Write-Host-Green "5. " -NoNewline; Write-Host "åˆ·æ–° Lade ç™»å½•çŠ¶æ€"
+    Write-Host-Red "6. " -NoNewline; Write-Host "é€€å‡º"
     Write-Host-Cyan "-------------------------------------------------------------"
-    $CHOICE = Read-Host "ÇëÑ¡ÔñÒ»¸ö²Ù×÷ (1-6):"
+    $CHOICE = Read-Host "è¯·é€‰æ‹©ä¸€ä¸ªæ“ä½œ (1-6):"
 
-    switch ($CHOICE) { # ¸ù¾İÓÃ»§Ñ¡ÔñÖ´ĞĞÏàÓ¦º¯Êı
+    switch ($CHOICE) { # æ ¹æ®ç”¨æˆ·é€‰æ‹©æ‰§è¡Œç›¸åº”å‡½æ•°
         "1" { Deploy-App }
         "2" { View-Apps }
         "3" { Delete-App }
         "4" { View-AppLogs }
         "5" { Ensure-LadeLogin }
-        "6" { Write-Host-Cyan "ÍË³ö½Å±¾¡£ÔÙ¼û£¡"; break } # ÍË³öÑ­»·
-        default { Write-Host-Red "ÎŞĞ§µÄÑ¡Ôñ£¬ÇëÊäÈë 1 µ½ 6 Ö®¼äµÄÊı×Ö¡£" }
+        "6" { Write-Host-Cyan "é€€å‡ºè„šæœ¬ã€‚å†è§ï¼"; break } # é€€å‡ºå¾ªç¯
+        default { Write-Host-Red "æ— æ•ˆçš„é€‰æ‹©ï¼Œè¯·è¾“å…¥ 1 åˆ° 6 ä¹‹é—´çš„æ•°å­—ã€‚" }
     }
     Write-Host ""
-    Read-Host "°´ Enter ¼ü¼ÌĞø..." | Out-Null # µÈ´ıÓÃ»§°´ Enter ¼ü¼ÌĞø
+    Read-Host "æŒ‰ Enter é”®ç»§ç»­..." | Out-Null # ç­‰å¾…ç”¨æˆ·æŒ‰ Enter é”®ç»§ç»­
 }
 
-Write-Host-Blue "½Å±¾Ö´ĞĞÍê±Ï¡£"
+Write-Host-Blue "è„šæœ¬æ‰§è¡Œå®Œæ¯•ã€‚"
