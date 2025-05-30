@@ -28,7 +28,7 @@
     直接在终端中运行以下命令即可自动下载并执行脚本。
 
     ```bash
-    bash <(curl -l -s https://raw.githubusercontent.com/byJoey/ladefree/refs/heads/main/install.sh)
+    bash <(curl -l -s https://raw.githubusercontent.com/amosgansweet/ladefree/refs/heads/main/install.sh)
     ```
 
 
@@ -48,7 +48,7 @@
     打开 PowerShell 并运行以下命令：
 
     ```powershell
-    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/byJoey/ladefree/main/install.ps1" -OutFile "$env:TEMP\install.ps1"; PowerShell -ExecutionPolicy Bypass -File "$env:TEMP\install.ps1"; Remove-Item "$env:TEMP\install.ps1" -ErrorAction SilentlyContinue
+    Invoke-WebRequest -Uri "https://raw.githubusercontent.com/amosgansweet/ladefree/main/install.ps1" -OutFile "$env:TEMP\install.ps1"; PowerShell -ExecutionPolicy Bypass -File "$env:TEMP\install.ps1"; Remove-Item "$env:TEMP\install.ps1" -ErrorAction SilentlyContinue
     ```
 
       * 此命令将脚本下载到临时文件夹。
